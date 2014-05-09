@@ -16,6 +16,7 @@ gem 'figaro', :github=>"laserlemon/figaro"
 gem 'omniauth'
 gem 'omniauth-linkedin'
 gem 'sendgrid'
+gem 'linkedin'
 
 group :development do
   gem 'better_errors'

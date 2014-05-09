@@ -89,6 +89,10 @@ GEM
     json (1.8.1)
     launchy (2.4.2)
       addressable (~> 2.3)
+    linkedin (0.4.7)
+      hashie (~> 2.0)
+      multi_json (~> 1.0)
+      oauth (~> 0.4)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -229,6 +233,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  linkedin
   omniauth
   omniauth-linkedin
   pry-rails

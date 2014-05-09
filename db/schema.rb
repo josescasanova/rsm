@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508183548) do
+ActiveRecord::Schema.define(version: 20140508215859) do
+
+  create_table "resumes", force: true do |t|
+    t.string   "location"
+    t.string   "current_status"
+    t.string   "picture_url"
+    t.text     "summary"
+    t.text     "work_experience"
+    t.text     "education"
+    t.integer  "current_status_timestamp"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -20,6 +33,10 @@ ActiveRecord::Schema.define(version: 20140508183548) do
     t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_url"
+    t.string   "location"
+    t.string   "consumer_token"
+    t.string   "consumer_secret"
   end
 
 end
