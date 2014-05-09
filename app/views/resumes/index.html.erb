@@ -1,6 +1,11 @@
 <h1>Resumes</h1>
 
 <br />
-Add Resume with Linkedin <br />
+
+<% if Resume.where(user_id: current_user.id).nil? %>
+  <%= link_to "Import Your Linkedin Resume", resumes_path, method: :post %> <br />
+  You currently do not have a Resume added.
+<% end %>
+
 <br />
-<li>Resume #1</li>
+<li>Resume <%= link_to "[VIEW]", resume_path(@resume) %></li>

@@ -2,13 +2,14 @@ class ResumesController < ApplicationController
 
   def index
     authenticate_user!
-    # binding.pry
+    @resume = Resume.where(user_id: current_user.id).first
   end
 
-  def new
+  def create
+    authenticate_user!
     @client = LinkedIn::Client.new
     @client.authorize_from_access(current_user.consumer_token, current_user.consumer_secret)
-    @resume = Resume.new do |u|
+    @resume = Resume.create do |u|
       u.location = current_user.location
       u.picture_url = current_user.image_url
       u.summary = @client.profile(:fields => %w(summary))
@@ -16,27 +17,18 @@ class ResumesController < ApplicationController
       u.education = @client.profile(:fields => %w(educations))
       u.user = current_user
     end
-
-    @resume.save!
-
+    
     if @resume.save
-      flash[:alert] = "Resume Saved!"
+      flash[:notice] = "Resume Saved!"
       redirect_to resumes_path
     else
-      flash[:error] = "Resume did not save."
+      flash[:success] = "Resume did not save."
       redirect_to resumes_path
     end
   end
 
-  def create
-    @resume = Resume.create(resume_params)
-    if @resume.save
-      flash[:success] = "Resume Saved!"
-      redirect_to resumes_path
-    else
-      flash[:error] = "Resume did not save."
-      redirect_to resumes_path
-    end
+  def show
+    @resume = Resume.where(user_id: current_user.id).first
   end
 
   private
