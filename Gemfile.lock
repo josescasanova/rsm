@@ -112,6 +112,7 @@ GEM
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
+    pg (0.17.1)
     polyglot (0.3.4)
     pry (0.9.12.6)
       coderay (~> 1.0)
@@ -236,6 +237,7 @@ DEPENDENCIES
   linkedin
   omniauth
   omniauth-linkedin
+  pg
   pry-rails
   pry-rescue
   quiet_assets
