@@ -1,1 +1,1 @@
-Resume app w/ lnkd
+Resume app w/ Linkedin import/oauth
