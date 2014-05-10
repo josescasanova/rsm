@@ -7,8 +7,26 @@
 <b>Summary:</b> <%= @resume.summary.first[1] %>
 <br />
 <br />
-<b>Work Experience: </b> 
-  <% # %>
+<b>Work Experience: </b> <br>
+  <% companies = @resume.work_experience.positions.all.map{|t| t.company } %>
+  <% summaries = @resume.work_experience.positions.all.map{|t| t.summary } %>
+  <% start_time = @resume.work_experience.positions.all.map{|t| t.start_date }%>
+  <% end_time = @resume.work_experience.positions.all.map{|t| t.end_date } %>
+
+<% #binding.pry %>
+  <% companies.zip(summaries, start_time, end_time).each do |z, x, c, v| %>
+    <b><%= z.name %></b> <br />
+      <%= c.month %>, 
+        <%= c.year %>  - 
+        <% if !v.nil? %>
+          <%= v.month %>,
+          <%= v.year %><br />
+        <% else %>
+          Current <br />
+        <% end %>
+        <br />
+      <%= x %> <br /> <br />
+  <% end %>
 
   <br />
   <br />
