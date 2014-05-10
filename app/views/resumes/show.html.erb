@@ -2,24 +2,25 @@
   <h2><%= current_user.name %></h2>
 <br/>
 <br />
+<h3>Contact Information:</h3>
 <b>Email:</b> <%= current_user.email %>
 <br />
-<b>Summary:</b> <%= @resume.summary.first[1] %>
+<h3>Summary:</h3>
+<%= @resume.summary.first[1] %>
 <br />
 <br />
-<b>Work Experience: </b> <br>
+<h3>Work Experience: </h3> <br>
   <% companies = @resume.work_experience.positions.all.map{|t| t.company } %>
   <% summaries = @resume.work_experience.positions.all.map{|t| t.summary } %>
   <% start_time = @resume.work_experience.positions.all.map{|t| t.start_date }%>
   <% end_time = @resume.work_experience.positions.all.map{|t| t.end_date } %>
 
-<% #binding.pry %>
   <% companies.zip(summaries, start_time, end_time).each do |z, x, c, v| %>
     <b><%= z.name %></b> <br />
-      <%= c.month %>, 
+      <%= Date::MONTHNAMES[c.month] %>, 
         <%= c.year %>  - 
         <% if !v.nil? %>
-          <%= v.month %>,
+          <%= Date::MONTHNAMES[v.month] %>,
           <%= v.year %><br />
         <% else %>
           Current <br />
@@ -28,6 +29,12 @@
       <%= x %> <br /> <br />
   <% end %>
 
-  <br />
-  <br />
-<b>Education:</b> <%= @resume.education %>
+<h3>Education:</h3>
+  <% education = @resume.education.educations.all %>
+  <% education.each do |x| %>
+    <%= x.school_name %> <br />
+    <% if !x.degree.blank? %>
+      <%= x.degree %> <br />
+    <% end %>
+    <%= x.start_date.year %> - <%= x.end_date.year %><br /><br />
+  <% end %>
